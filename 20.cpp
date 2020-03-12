@@ -16,9 +16,9 @@ int irand(int n) // генерирует случ. числа.
 void input_arr1(int** arr, int n, int m) // Ввод чисел. случ. образом.
 {
 
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; i++) {
         arr[i] = (int*)malloc(m * sizeof(int)); // выделение памяти под хранение строк
-        for (int j = 0; j < m; ++j) {
+        for (int j = 0; j < m; j++) {
             arr[i][j] = irand(n);
         }
     }
@@ -30,7 +30,7 @@ void input_arr2(int* arr[], int n, int m) // Ввод чисел в ручную
 
     for (int i = 0; i < n; i++) {
         arr[i] = (int*)malloc((m * sizeof(int))); // выделение памяти под хранение строк
-        for (int j = 0; j < m; ++j) {
+        for (int j = 0; j < m; j++) {
             do {
                 printf("a[%d][%d]= ", i, j);
                 scanf_s("%d", &arr[i][j]);
@@ -48,7 +48,7 @@ void extra_arr(int** arr, int n, int m, int max) // Вывод эл.матриц
 
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < m; ++j)
+        for (int j = 0; j < m; j++)
         {
             if 
         }
@@ -64,7 +64,7 @@ void output_arr(int** arr, int n, int m) // Вывод эл.матрицы
 
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < m; ++j) {
+        for (int j = 0; j < m; j++) {
             printf("%4d", *&arr[i][j]);
             printf(" ");
         }
