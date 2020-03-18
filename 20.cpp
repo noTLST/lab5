@@ -1,128 +1,57 @@
-#include <stdlib.h> 
-#include <time.h>
-#include <locale.h>
-#include <stdio.h>
-#include <math.h>
+#include <stdio.h> //scanf() printf()
+#include <locale.h> //setlocale()
+#include <stdlib.h> //rand() malloc()
 
-int irand(int n) // генерирует случ. числа.
+void input_arr1(int* A, int n) //Ввод массива с клавиатуры
 {
-
-    int n2 = pow(n, 2);
-
-    return 1 + rand() % (n2 - 1 + 1);
-
+	int i;
+	for (i = 0; i < n; i++)
+	{
+		printf("A[%d]=", i);
+		scanf_s("%d", &A[i]);
+	}
 }
 
-void input_arr1(int** arr, int n, int m) // Ввод чисел. случ. образом.
+int random(int a)
 {
-
-    for (int i = 0; i < n; i++) {
-        arr[i] = (int*)malloc(m * sizeof(int)); // выделение памяти под хранение строк
-        for (int j = 0; j < m; j++) {
-            arr[i][j] = irand(n);
-        }
-    }
-
+	return rand() % a;
 }
 
-void input_arr2(int* arr[], int n, int m) // Ввод чисел в ручную.
+void input_arr2(int* A, int n)
 {
-
-    for (int i = 0; i < n; i++) {
-        arr[i] = (int*)malloc((m * sizeof(int))); // выделение памяти под хранение строк
-        for (int j = 0; j < m; j++) {
-            do {
-                printf("a[%d][%d]= ", i, j);
-                scanf_s("%d", &arr[i][j]);
-
-            } while (arr[i][j] > n * m || arr[i][j] < 0);
-        }
-    }
-
+	int i;
+	for (i = 0; i < n; i++)
+		A[i] = random(201);
 }
 
-void extra_arr(int** arr, int n, int m, int max) // Вывод эл.матрицы
+void out_arr(int* A, int n)
 {
-
-    max = *&arr[0][0];
-
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < m; j++)
-        {
-            if 
-        }
-        printf("\n");
-    }
-
-    printf("\n");
-
+	int i;
+	for (i = 0; i < n; i++)
+		printf("%5d", A[i]);
+	printf("\n");
 }
 
-void output_arr(int** arr, int n, int m) // Вывод эл.матрицы
+void main()
 {
-
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < m; j++) {
-            printf("%4d", *&arr[i][j]);
-            printf(" ");
-        }
-        printf("\n");
-    }
-
-    printf("\n");
-
-}
-
-int main()
-{
-
-    srand(time(NULL)); // сбрасывание генератора чисел.
-    setlocale(LC_ALL, "Rus");
-
-    int n, m; // кол-во элементов в массиве n*m.
-
-    do // Проверка на корректность ввода данных.
-    {
-
-        printf("Введите кол-во строк: ");
-        scanf_s("%d", &n);
-
-        printf("Введите кол-во столбцов: ");
-        scanf_s("%d", &m);
-
-    } while (n <= 0 && m <= 0);
-
-    int** arr = (int**)malloc(n * sizeof(int*)); // выделение памяти для массива указателей.
-
-    if (arr == NULL) // сработает в том случае, если память будет не выделена.
-    {
-
-        printf("Память не выделена");
-        return 1;
-    }
-
-    int O; // переменная для выбора, как будем вводить эл. массива.
-
-    do // проверка на корректность ввода данных для ввода эл. массива.
-    {
-
-        printf("1 - случайное число\n2 - Ввод с клавиатуры\n");
-        scanf_s("%d", &O);
-
-    } while (O != 1 && O != 2);
-
-    if (O == 1) // если истина, то выполнится функция для ввода случайных чисел матрицы.
-        input_arr1(arr, n, m);
-    else // или для ввода вручную чисел для массива.
-        input_arr2(arr, n, m);
-
-    printf("Исходный массив:\n");
-    output_arr(arr, n, m); // функция для отображения эл. матрицы.
-
-    extra_arr(); //Обработка массива
-
-    free(arr); // очищение памяти.
-
+	setlocale(LC_ALL, "rus");
+	int n,p;
+	//Создание массива
+	printf("Введите размер массива: ");
+	scanf_s("%d", &n);
+	int* A = (int*)malloc(n * sizeof(int));
+	do
+	{
+		printf("Способ задания массива(0-вручную, 1-рандомно): ");
+		scanf_s("%d", &p);
+	} while (p < 0 && p > 1);
+	if (p == 0)
+	{
+		printf("\nВведите элементы массива:\n");
+		input_arr1(A, n);
+	}
+	else input_arr2(A, n);
+	out_arr(A, n);
+	getchar();
+	getchar();
 }
