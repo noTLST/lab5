@@ -32,14 +32,15 @@ void out_arr(int* A, int n)
 	printf("\n");
 }
 
-void main()
+int main()
 {
 	setlocale(LC_ALL, "rus");
-	int n,p;
+	int j,n,p,i,max;
 	//Создание массива
 	printf("Введите размер массива: ");
 	scanf_s("%d", &n);
 	int* A = (int*)malloc(n * sizeof(int));
+	int* B = (int*)malloc(n * sizeof(int));
 	do
 	{
 		printf("Способ задания массива(0-вручную, 1-рандомно): ");
@@ -52,6 +53,16 @@ void main()
 	}
 	else input_arr2(A, n);
 	out_arr(A, n);
-	getchar();
-	getchar();
-}
+	// Удалить из массива «лишние» элементы, так чтобы оставшиеся образовывали возрастающую последовательность
+	for (j = 1; j < n; j++)
+	{
+		for (i = 1; i < n; i++)
+		{
+			max = A[0];
+			if (A[i] >= max)
+				max = A[i];
+			else B[j] = A[i];
+		}
+	}
+	out_arr(B, n);
+	}
